@@ -8,7 +8,7 @@
 
 ## Link:
 
-<a href="">Link to deployed app</a>
+<a href="https://mbenson025.github.io/weather-dashboard/">Link to deployed app</a>
 
 <br>
 
@@ -54,6 +54,8 @@ THEN I am again presented with current and future conditions for that city
 ## Credits
 
 <a href="https://openweathermap.org/api/one-call-api">OpenWeather API</a>
+
+AJAX Fetch: https://www.youtube.com/watch?v=fEYx8dQr_cQ
 
 ## License
 
