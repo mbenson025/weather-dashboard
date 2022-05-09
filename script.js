@@ -1,6 +1,5 @@
 //document ready function
-// $(function (){
-// });
+$(document).ready(function() {
 
 //global variables
 var apiKey = 'b6a631faf48ec36736fa91299da2f0a2';
@@ -13,33 +12,51 @@ var wind;
 var humidity;
 var uv;
 
+// var testCity = Chicago;
+
 var currentTime = moment().hour();
 // console.log(currentTime);
 
 
 let data = [];
 
-getWeather();
-function getWeather() {
-var queryURL = `https://api.openweathermap.org/data/2.5/weather?appid={apiKey}&units=imperial`;
-//imperial for fahrenheit(still doesn't work)
 
 
-$.ajax({
-  type: 'GET',
-  url: queryURL,
+  $('#searchWeather').click(function(){
 
-  success: function(data) {
-    console.log('success');
-  }
-});
+    var apiKey = 'b6a631faf48ec36736fa91299da2f0a2';
 
+    //take input value from search field
+    var city = $('#city').val();
+
+    //check for empty field
+    if (city != '') {
+
+
+        $.ajax({
+
+          type: "GET",
+          url: "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric" + "&APPID=b6a631faf48ec36736fa91299da2f0a2",
+          id: "city",
+          success: function(data) {
+            console.log(data);
+            
+
+            var info = reveal(data);
+            $('#reveal').html(info);
+          }
+      });
+
+    } else {
+      $('#inputError').text('Please enter a city name');
+    }
+  });
+
+
+function reveal(data) {
+  return
 }
 
 
-
-
-
-
-// eventListeners-----
-// $('searchBtn').on('click', getWeather);
+});
+//close ready function
