@@ -5,28 +5,15 @@ $(document).ready(function() {
 var cityWeather;
 var recentHistory;
 
-
-// var testCity = Chicago;
-
-var currentTime = moment().hour();
-// console.log(currentTime);
-
-let data = [];
-
-
-
-
-
   $('#searchWeather').click(function(){
 
     var apiKey = 'b6a631faf48ec36736fa91299da2f0a2';
 
     //take input value from search field
-    var city = $('#city').val();
+    var city = $('#cityInput').val();
 
     //check for empty field
     if (city != '') {
-
 
         $.ajax({
 
@@ -38,11 +25,11 @@ let data = [];
             var weatherArray = reveal(data);
             $('#reveal').text(weatherArray);
             console.log(data);
-            // console.log(data.coord.lat);
             var uvLat = data.coord.lat;
             var uvLon = data.coord.lon;
             // console.log(uvLat);
             // console.log(uvLon);
+            // $('#daily-forecast').text(`${city}`)
 
             var dailyTemp = (`Temperature: ${data.main.temp} °F`);
             var dailyWind = (`Wind Speed: ${data.wind.speed} MPH`);
@@ -51,7 +38,6 @@ let data = [];
             $('#dailyConditions').append($(`<li>${dailyTemp}</li>`));
             $('#dailyConditions').append($(`<li>${dailyWind}</li>`));
             $('#dailyConditions').append($(`<li>${dailyHumid}</li>`));
-
 
             $.ajax({
 
@@ -70,7 +56,7 @@ let data = [];
                   $('#uvColor').css('background-color', '#78c74a').attr('class', 'badge');
                 }
                 else if (propUV <= 5) {
-                  $('#uvColor').css('background-color', '#f4ee86').css('color', 'black').attr('class', 'badge');
+                  $('#uvColor').css('background-color', '#FEC901').attr('class', 'badge');
                 }
                 else if (propUV <= 7) {
                   $('#uvColor').css('background-color', '#e36530').attr('class', 'badge');
@@ -82,15 +68,9 @@ let data = [];
                   $('#uvColor').css('background-color', '#a76ebb').attr('class', 'badge');
                 }
                 
-
-
-
                 fiveCast(uvLat,uvLon);
               }
             });
-
-
-            
           }
       });
 
@@ -105,17 +85,16 @@ let data = [];
           }).then(function (data) {
             
             console.log(data.list);
-            console.log(data.list[0]);
-            console.log(data.list[0].dt);
-            console.log(data.list[0].main.temp);
-            //TOO EASY
+            // console.log(data.list[0]);
+            // console.log(data.list[0].dt);
+            // console.log(data.list[0].main.temp);
 
-            for (i=0; i<35; i+=7) {
-              var forecastCard = $('<div class="card col">');
-              var forecastTitle = $('<p class="castDate">');
-              var forecastTemp = $('<p class="temp">');
-              var forecastWind = $('<p class="wind">');
-              var forecastHumidity = $('<p class="humid">');
+            for (i=7; i<42; i+=7) {
+              var forecastCard = $('<div class = "card col">');
+              var forecastTitle = $('<p class = "castDate">');
+              var forecastTemp = $('<p class = "temp">');
+              var forecastWind = $('<p class = "wind">');
+              var forecastHumidity = $('<p class = "humid">');
               // var forecastUV = $(`<p class="castUV">`)
 
               var compTime = data.list[i].dt;
@@ -123,11 +102,13 @@ let data = [];
               var date = new Date(humanTime);
               console.log(date);
 
+              var currentTime = moment(date).format('MM/DD/YYYY');
+
+              forecastTitle.text(`${currentTime}`);
               forecastTemp.text(`Temperature: ${data.list[i].main.temp}`);
               forecastWind.text(`Wind: ${data.list[i].wind.speed}`);
               forecastHumidity.text(`Humidity: ${data.list[i].main.humidity}`);
               
-
               $(`.forecastRow`).append(forecastCard);
               forecastCard.append(forecastTitle);
               forecastCard.append(forecastTemp);
@@ -137,13 +118,10 @@ let data = [];
           });
         }
 
-          
-      
     } else {
       $('#inputError').text('Please enter a city name');
     }
   });
-
 
 function reveal(data) {
   return
