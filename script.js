@@ -66,9 +66,22 @@ let data = [];
                 console.log(propUV);
 
                 //openweather links to wiki with 0-2 green(low), 3-5 yellow(moderate), 6-7 orange(high), 8-10 red(very high), 11+ violet(extreme)
-                if (propUV < 10) {
-                  $('#uvColor').css('background-color', 'red')
+                if (propUV <= 3) {
+                  $('#uvColor').css('background-color', '#78c74a').attr('class', 'badge');
                 }
+                else if (propUV <= 5) {
+                  $('#uvColor').css('background-color', '#f4ee86').css('color', 'black').attr('class', 'badge');
+                }
+                else if (propUV <= 7) {
+                  $('#uvColor').css('background-color', '#e36530').attr('class', 'badge');
+                }
+                else if (propUV <= 10) {
+                  $('#uvColor').css('background-color', '#cc3129').attr('class', 'badge');
+                }
+                else {
+                  $('#uvColor').css('background-color', '#a76ebb').attr('class', 'badge');
+                }
+                
 
 
 
