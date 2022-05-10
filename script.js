@@ -31,7 +31,6 @@ let data = [];
         $.ajax({
 
           type: "GET",
-          // url: "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&APPID=b6a631faf48ec36736fa91299da2f0a2",
           url: `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&APPID=${apiKey}`,
           id: "city",
           success: function(data) {
@@ -45,10 +44,20 @@ let data = [];
             // console.log(uvLat);
             // console.log(uvLon);
 
-            var dailyTemp = dailyConditions.append(`Temperature: ${data.main.temp} °F`)
-            var dailyWind = dailyConditions.append(`Wind Speed: ${data.wind.speed} MPH`)
-            var dailyHumid = dailyConditions.append(`Humidity: ${data.main.humidity}%`)
+            var dailyTemp = (`Temperature: ${data.main.temp} °F`);
+            var dailyWind = (`Wind Speed: ${data.wind.speed} MPH`);
+            var dailyHumid = (`Humidity: ${data.main.humidity}%`);
+
+            $('#dailyConditions').append($(`<li>${dailyTemp}</li>`));
+            $('#dailyConditions').append($(`<li>${dailyWind}</li>`));
+            $('#dailyConditions').append($(`<li>${dailyHumid}</li>`));
             
+            
+
+
+
+
+
             $.ajax({
 
               type: "GET",
@@ -56,7 +65,16 @@ let data = [];
               id: "city",
               success: function(data) {
                 
-                var dailyUV = dailyConditions.append(`UV Index: ${data.current.uvi}`)
+                var propUV = `${data.current.uvi}`;
+                var strUV = (`UV Index: ${propUV}`);
+                $('#dailyConditions').append(`<li>${strUV}</li>`);
+
+                //openweather links to wiki with 0-2 green(low), 3-5 yellow(moderate), 6-7 orange(high), 8-10 red(very high), 11+ violet(extreme)
+                // if (propUV <= 10) {
+                  
+                // }
+
+
 
                 fiveCast(uvLat,uvLon);
               }
@@ -77,7 +95,7 @@ let data = [];
             
           }).then(function (data) {
             
-            console.log(data.list)
+            console.log(data.list);
             console.log(data.list[0]);
             console.log(data.list[0].dt);
             console.log(data.list[0].main.temp);
@@ -91,12 +109,11 @@ let data = [];
               var forecastHumidity = $('<p class="humid">');
               // var forecastUV = $(`<p class="castUV">`)
 
-              var compTime = data.list[i].dt
+              var compTime = data.list[i].dt;
               var humanTime = compTime *= 1000;
               var date = new Date(humanTime);
               console.log(date);
 
-              
               forecastTemp.text(`Temperature: ${data.list[i].main.temp}`);
               forecastWind.text(`Wind: ${data.list[i].wind.speed}`);
               forecastHumidity.text(`Humidity: ${data.list[i].main.humidity}`);
