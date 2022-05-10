@@ -39,16 +39,26 @@ let data = [];
           url: `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&APPID=${apiKey}`,
           id: "city",
           success: function(data) {
-            console.log(data);
-            
 
             var weatherArray = reveal(data);
             $('#reveal').text(weatherArray);
             console.log(data);
+            // console.log(coord.lat);
 
             var dailyTemp = dailyConditions.append(`Temperature: ${data.main.temp}`)
             var dailyWind = dailyConditions.append(`Wind: ${data.wind.speed}`)
             var dailyHumid = dailyConditions.append(`Humidity: ${data.main.humidity}`)
+            
+            $.ajax({
+
+              type: "GET",
+              url: `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude={part}&appid=${apiKey}`,
+              id: "city",
+              success: function() {
+                var uvArray = uvShow(data);
+                console.log(data.main.uv);
+              }
+            })
 
 
             
