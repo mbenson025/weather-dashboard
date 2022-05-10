@@ -51,11 +51,6 @@ let data = [];
             $('#dailyConditions').append($(`<li>${dailyTemp}</li>`));
             $('#dailyConditions').append($(`<li>${dailyWind}</li>`));
             $('#dailyConditions').append($(`<li>${dailyHumid}</li>`));
-            
-            
-
-
-
 
 
             $.ajax({
@@ -66,13 +61,14 @@ let data = [];
               success: function(data) {
                 
                 var propUV = `${data.current.uvi}`;
-                var strUV = (`UV Index: ${propUV}`);
-                $('#dailyConditions').append(`<li>${strUV}</li>`);
+                // var strUV = (`UV Index: ${propUV}`);
+                $('#dailyConditions').append(`<li>UV Index: <span id="uvColor">${propUV}</span></li>`);
+                console.log(propUV);
 
                 //openweather links to wiki with 0-2 green(low), 3-5 yellow(moderate), 6-7 orange(high), 8-10 red(very high), 11+ violet(extreme)
-                // if (propUV <= 10) {
-                  
-                // }
+                if (propUV < 10) {
+                  $('#uvColor').css('background-color', 'red')
+                }
 
 
 
