@@ -4,12 +4,7 @@ $(document).ready(function() {
 //global variables
 var cityWeather;
 var recentHistory;
-var lat;
-var lon;
-var temp;
-var wind;
-var humidity;
-var uv;
+
 
 // var testCity = Chicago;
 
@@ -36,7 +31,7 @@ let data = [];
 
           type: "GET",
           // url: "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&APPID=b6a631faf48ec36736fa91299da2f0a2",
-          url: `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&APPID=${apiKey}`,
+          url: `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&APPID=${apiKey}`,
           id: "city",
           success: function(data) {
 
@@ -49,9 +44,9 @@ let data = [];
             // console.log(uvLat);
             // console.log(uvLon);
 
-            var dailyTemp = dailyConditions.append(`Temperature: ${data.main.temp}`)
-            var dailyWind = dailyConditions.append(`Wind: ${data.wind.speed}`)
-            var dailyHumid = dailyConditions.append(`Humidity: ${data.main.humidity}`)
+            var dailyTemp = dailyConditions.append(`Temperature: ${data.main.temp} °F`)
+            var dailyWind = dailyConditions.append(`Wind: ${data.wind.speed} MPH`)
+            var dailyHumid = dailyConditions.append(`Humidity: ${data.main.humidity}%`)
             
             $.ajax({
 
@@ -68,6 +63,12 @@ let data = [];
             
           }
       });
+          //5 DAYS
+          $.ajax({
+
+            type: "GET",
+            url: `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&APPID=${apiKey}`,
+          })
 
     } else {
       $('#inputError').text('Please enter a city name');
