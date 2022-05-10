@@ -11,8 +11,9 @@ var recentHistory;
 var currentTime = moment().hour();
 // console.log(currentTime);
 
-
 let data = [];
+
+
 
 
 
@@ -45,7 +46,7 @@ let data = [];
             // console.log(uvLon);
 
             var dailyTemp = dailyConditions.append(`Temperature: ${data.main.temp} °F`)
-            var dailyWind = dailyConditions.append(`Wind: ${data.wind.speed} MPH`)
+            var dailyWind = dailyConditions.append(`Wind Speed: ${data.wind.speed} MPH`)
             var dailyHumid = dailyConditions.append(`Humidity: ${data.main.humidity}%`)
             
             $.ajax({
@@ -56,20 +57,62 @@ let data = [];
               success: function(data) {
                 
                 var dailyUV = dailyConditions.append(`UV Index: ${data.current.uvi}`)
+
+                fiveCast(uvLat,uvLon);
               }
-            })
+            });
 
 
             
           }
       });
+
+          function fiveCast (uvLat,uvLon) {
           //5 DAYS
           $.ajax({
 
             type: "GET",
             url: `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&APPID=${apiKey}`,
-          })
+            id: "city",
+            
+          }).then(function (data) {
+            
+            console.log(data.list)
+            console.log(data.list[0]);
+            console.log(data.list[0].dt);
+            console.log(data.list[0].main.temp);
+            //TOO EASY
 
+            for (i=0; i<35; i+=7) {
+              var forecastCard = $('<div class="card col">');
+              var forecastTitle = $('<p class="castDate">');
+              var forecastTemp = $('<p class="temp">');
+              var forecastWind = $('<p class="wind">');
+              var forecastHumidity = $('<p class="humid">');
+              // var forecastUV = $(`<p class="castUV">`)
+
+              var compTime = data.list[i].dt
+              var humanTime = compTime *= 1000;
+              var date = new Date(humanTime);
+              console.log(date);
+
+              
+              forecastTemp.text(`Temperature: ${data.list[i].main.temp}`);
+              forecastWind.text(`Wind: ${data.list[i].wind.speed}`);
+              forecastHumidity.text(`Humidity: ${data.list[i].main.humidity}`);
+              
+
+              $(`.forecastRow`).append(forecastCard);
+              forecastCard.append(forecastTitle);
+              forecastCard.append(forecastTemp);
+              forecastCard.append(forecastWind);
+              forecastCard.append(forecastHumidity);
+            }
+          });
+        }
+
+          
+      
     } else {
       $('#inputError').text('Please enter a city name');
     }

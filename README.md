@@ -57,6 +57,8 @@ THEN I am again presented with current and future conditions for that city
 
 AJAX Fetch: https://www.youtube.com/watch?v=fEYx8dQr_cQ
 
+unix/epoch to datetime: https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript
+
 ## License
 
 NA
