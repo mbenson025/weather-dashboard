@@ -43,7 +43,11 @@ let data = [];
             var weatherArray = reveal(data);
             $('#reveal').text(weatherArray);
             console.log(data);
-            // console.log(coord.lat);
+            // console.log(data.coord.lat);
+            var uvLat = data.coord.lat;
+            var uvLon = data.coord.lon;
+            // console.log(uvLat);
+            // console.log(uvLon);
 
             var dailyTemp = dailyConditions.append(`Temperature: ${data.main.temp}`)
             var dailyWind = dailyConditions.append(`Wind: ${data.wind.speed}`)
@@ -52,11 +56,11 @@ let data = [];
             $.ajax({
 
               type: "GET",
-              url: `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude={part}&appid=${apiKey}`,
+              url: `https://api.openweathermap.org/data/2.5/onecall?lat=${uvLat}&lon=${uvLon}&exclude={part}&appid=${apiKey}`,
               id: "city",
-              success: function() {
-                var uvArray = uvShow(data);
-                console.log(data.main.uv);
+              success: function(data) {
+                
+                var dailyUV = dailyConditions.append(`UV Index: ${data.current.uvi}`)
               }
             })
 
