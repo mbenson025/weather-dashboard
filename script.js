@@ -2,7 +2,6 @@
 $(document).ready(function() {
 
 //global variables
-var apiKey = 'b6a631faf48ec36736fa91299da2f0a2';
 var cityWeather;
 var recentHistory;
 var lat;
@@ -36,14 +35,23 @@ let data = [];
         $.ajax({
 
           type: "GET",
-          url: "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric" + "&APPID=b6a631faf48ec36736fa91299da2f0a2",
+          // url: "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&APPID=b6a631faf48ec36736fa91299da2f0a2",
+          url: `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&APPID=${apiKey}`,
           id: "city",
           success: function(data) {
             console.log(data);
             
 
-            var info = reveal(data);
-            $('#reveal').html(info);
+            var weatherArray = reveal(data);
+            $('#reveal').text(weatherArray);
+            console.log(data);
+
+            var dailyTemp = dailyConditions.append(`Temperature: ${data.main.temp}`)
+            var dailyWind = dailyConditions.append(`Wind: ${data.wind.speed}`)
+            var dailyHumid = dailyConditions.append(`Humidity: ${data.main.humidity}`)
+
+
+            
           }
       });
 
