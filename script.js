@@ -1,19 +1,24 @@
-//document ready function
-$(document).ready(function() {
-
 //global variables
 var cityWeather;
-var recentHistory;
+var cityHistory = [];
 
-  $('#searchWeather').click(function(){
+  
+
+  function searchWeather() {
+    
 
     var apiKey = 'b6a631faf48ec36736fa91299da2f0a2';
 
+
     //take input value from search field
-    var city = $('#cityInput').val();
+    var city = $('#cityInput').val().trim();
+    //clear previous search
+    $("#dailyConditions").empty();
+    $(".forecastRow").empty();
 
     //check for empty field
     if (city != '') {
+        // localStorage.setItem('cityHistory', JSON.stringify(cityHistory));
 
         $.ajax({
 
@@ -22,8 +27,7 @@ var recentHistory;
           id: "city",
           success: function(data) {
 
-            var weatherArray = reveal(data);
-            $('#reveal').text(weatherArray);
+            
             console.log(data);
             var uvLat = data.coord.lat;
             var uvLon = data.coord.lon;
@@ -119,14 +123,20 @@ var recentHistory;
         }
 
     } else {
-      $('#inputError').text('Please enter a city name');
+      $('#inputError').text('Please enter a city');
     }
+  };
+
+
+
+$('#submitBtn').click(function(){
+    searchWeather();
+
   });
+  //search with enter key
+$('#cityInput').keypress(function(e){
+  if(e.which === 13) {
+    searchWeather();
+  }
+})
 
-function reveal(data) {
-  return
-}
-
-
-});
-//close ready function
