@@ -65,6 +65,8 @@ timestamp to US date format: https://developer.mozilla.org/en-US/docs/Web/JavaSc
 
 capitalize first letter of each word: https://stackoverflow.com/questions/62420487/jquery-capitalize-first-letter-of-each-word
 
+includes function for checking duplicate searches: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes
+
 ## License
 
 NA

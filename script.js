@@ -11,8 +11,7 @@ var cityWeather;
 
     console.log(cityHistory);
 
-    
-    
+    //take input, trim spaces and convert to lowercase
     var cityInputField = $('#cityInput').val().trim().toLowerCase();
 
     //capitalize each first letter
@@ -35,21 +34,24 @@ var cityWeather;
     
     //check for empty field
     if (cityInput != '') {
+      //check for duplicate search before putting into array
+      if (!cityHistory.includes(cityInput)){
         cityHistory.push(cityInput);
+      }
         localStorage.setItem('historyKey', JSON.stringify(cityHistory));
         console.log(cityHistory.length);
 
+        
         showCities();
         function showCities() {
 
           for (var i = 0; i < cityHistory.length; i++) {
-            var cityList = document.createElement('li');
+            var cityList = document.createElement('button');
             $(cityList).text(cityHistory[i]);
-            console.log(cityList);
             $('.recentHistory').append(cityList);
           }
-
         }
+
         
 
         $.ajax({
@@ -88,7 +90,6 @@ var cityWeather;
               success: function(data) {
                 console.log(data);
                 var propUV = `${data.current.uvi}`;
-                // var strUV = (`UV Index: ${propUV}`);
                 $('#dailyConditions').append(`<li>UV Index: <span id="uvColor">${propUV}</span></li>`);
                 console.log(propUV);
 
