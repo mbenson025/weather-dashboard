@@ -1,11 +1,16 @@
 //global variables
 var cityWeather;
 
+
+
   
 
   function searchWeather() {
     var apiKey = 'b6a631faf48ec36736fa91299da2f0a2';
-    var cityHistory = JSON.parse(localStorage.getItem('historyKey'));
+    var cityHistory = JSON.parse(localStorage.getItem('historyKey')) || [];
+
+    console.log(cityHistory);
+
     
     
     var cityInputField = $('#cityInput').val().trim().toLowerCase();
@@ -19,24 +24,32 @@ var cityWeather;
 
     return `${firstLetter}${rest}`
     });
-
     return output.join(' ')
     }
 
-
     var cityInput = capitalize(cityInputField);
-
     
     //clear previous search
     $("#dailyConditions").empty();
     $(".forecastRow").empty();
-    // $('#dailyTitle').html("");
     
     //check for empty field
     if (cityInput != '') {
         cityHistory.push(cityInput);
         localStorage.setItem('historyKey', JSON.stringify(cityHistory));
-        // console.log(cityHistory);
+        console.log(cityHistory.length);
+
+        showCities();
+        function showCities() {
+
+          for (var i = 0; i < cityHistory.length; i++) {
+            var cityList = document.createElement('li');
+            $(cityList).text(cityHistory[i]);
+            console.log(cityList);
+            $('.recentHistory').append(cityList);
+          }
+
+        }
         
 
         $.ajax({
@@ -166,3 +179,6 @@ $('#cityInput').keypress(function(e){
   }
 })
 
+
+
+  
