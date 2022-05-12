@@ -1,15 +1,33 @@
-//global variables
-var cityWeather;
+$(document).ready(function() {
+    var cityHistory = JSON.parse(localStorage.getItem('historyKey')) || [];
+
+    if (cityHistory !== null) {
+        
+        cityHistory.forEach(function(cityHistory){
+        $('.recentHistory').append('<li>' + cityHistory + '</li>');
+        });
+    
+    }
+});
 
 
 
+
+var cityHistory = [];
   
 
   function searchWeather() {
     var apiKey = 'b6a631faf48ec36736fa91299da2f0a2';
-    var cityHistory = JSON.parse(localStorage.getItem('historyKey')) || [];
+    // var cityHistory = JSON.parse(localStorage.getItem('historyKey')) || [];
+    // cityHistory.forEach(function(cityHistory){
+    //   $('.recentHistory').append('<li>' + cityHistory + '</li>');
+    // });
+    
+    // $('.recentHistory').append(citySearches);
+    // console.log(cityHistory);
 
-    console.log(cityHistory);
+
+    
 
     //take input, trim spaces and convert to
     var cityInputField = $('#cityInput').val().trim().toLowerCase();
@@ -37,7 +55,7 @@ var cityWeather;
       //check for duplicate search before putting into array
       if (!cityHistory.includes(cityInput)){
         cityHistory.push(cityInput);
-        var cityList = $(`<li><button class="pastCity">${cityInput}</button></li>`);
+        var cityList = $(`<li class="pastCity">${cityInput}</li>`);
         console.log(cityList);
         $('.recentHistory').append(cityList);
 
