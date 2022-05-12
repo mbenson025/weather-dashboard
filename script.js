@@ -1,16 +1,17 @@
 $(document).ready(function() {
+    $('#five-day-forecast').hide();
+    $('#daily-forecast').hide();
+
+
     var cityHistory = JSON.parse(localStorage.getItem('historyKey')) || [];
 
     if (cityHistory !== null) {
         
         cityHistory.forEach(function(cityHistory){
-        $('.recentHistory').append('<li>' + cityHistory + '</li>');
+        $('.recentHistory').append('<li>' +  cityHistory + '</li>');
         });
-    
     }
 });
-
-
 
 
 var cityHistory = [];
@@ -18,17 +19,9 @@ var cityHistory = [];
 
   function searchWeather() {
     var apiKey = 'b6a631faf48ec36736fa91299da2f0a2';
-    // var cityHistory = JSON.parse(localStorage.getItem('historyKey')) || [];
-    // cityHistory.forEach(function(cityHistory){
-    //   $('.recentHistory').append('<li>' + cityHistory + '</li>');
-    // });
     
-    // $('.recentHistory').append(citySearches);
-    // console.log(cityHistory);
-
-
+    var cityHistory = JSON.parse(localStorage.getItem('historyKey')) || [];
     
-
     //take input, trim spaces and convert to
     var cityInputField = $('#cityInput').val().trim().toLowerCase();
 
@@ -63,18 +56,7 @@ var cityHistory = [];
         localStorage.setItem('historyKey', JSON.stringify(cityHistory));
         console.log(cityHistory.length);
 
-        
-        // showCities();
-        // function showCities() {
-
-        //   for (var i = 0; i < cityHistory.length; i++) {
-        //     var cityList = document.createElement('button');
-        //     $(cityList).text(cityHistory[i]);
-        //     $('.recentHistory').append(cityList);
-        //   }
-        // }
-
-        
+        $('#daily-forecast').show();
 
         $.ajax({
 
@@ -103,6 +85,8 @@ var cityHistory = [];
             $('#dailyConditions').append($(`<li>${dailyTemp}</li>`));
             $('#dailyConditions').append($(`<li>${dailyWind}</li>`));
             $('#dailyConditions').append($(`<li>${dailyHumid}</li>`));
+
+            $('#five-day-forecast').show();
 
             $.ajax({
 
