@@ -11,7 +11,7 @@ var cityWeather;
 
     console.log(cityHistory);
 
-    //take input, trim spaces and convert to lowercase
+    //take input, trim spaces and convert to
     var cityInputField = $('#cityInput').val().trim().toLowerCase();
 
     //capitalize each first letter
@@ -37,20 +37,24 @@ var cityWeather;
       //check for duplicate search before putting into array
       if (!cityHistory.includes(cityInput)){
         cityHistory.push(cityInput);
+        var cityList = $(`<li><button class="pastCity">${cityInput}</button></li>`);
+        console.log(cityList);
+        $('.recentHistory').append(cityList);
+
       }
         localStorage.setItem('historyKey', JSON.stringify(cityHistory));
         console.log(cityHistory.length);
 
         
-        showCities();
-        function showCities() {
+        // showCities();
+        // function showCities() {
 
-          for (var i = 0; i < cityHistory.length; i++) {
-            var cityList = document.createElement('button');
-            $(cityList).text(cityHistory[i]);
-            $('.recentHistory').append(cityList);
-          }
-        }
+        //   for (var i = 0; i < cityHistory.length; i++) {
+        //     var cityList = document.createElement('button');
+        //     $(cityList).text(cityHistory[i]);
+        //     $('.recentHistory').append(cityList);
+        //   }
+        // }
 
         
 
@@ -146,10 +150,12 @@ var cityWeather;
 
               var currentTime = moment(date).format('MM/DD/YYYY');
 
-              forecastTitle.text(`${currentTime}`);
+              iconData = (`<img src="https://openweathermap.org/img/wn/${data.list[i].weather[0].icon}.png"/>`);
+              forecastTitle.html(`${currentTime} ${iconData}`);
               forecastTemp.text(`Temperature: ${data.list[i].main.temp}`);
               forecastWind.text(`Wind: ${data.list[i].wind.speed}`);
               forecastHumidity.text(`Humidity: ${data.list[i].main.humidity}`);
+              
               
               
               $(`.forecastRow`).append(forecastCard);
