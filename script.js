@@ -1,44 +1,68 @@
 //global variables
 var cityWeather;
-var cityHistory = [];
 
   
 
   function searchWeather() {
-    
-
     var apiKey = 'b6a631faf48ec36736fa91299da2f0a2';
+    var cityHistory = JSON.parse(localStorage.getItem('historyKey'));
+    
+    
+    var cityInputField = $('#cityInput').val().trim().toLowerCase();
+
+    //capitalize each first letter
+    function capitalize(cityInputField) {
+    const words = cityInputField.split(' ');
+    const output = words.map(word => {
+    const firstLetter = word.substring(0, 1).toUpperCase();
+    const rest = word.substring(1);  
+
+    return `${firstLetter}${rest}`
+    });
+
+    return output.join(' ')
+    }
 
 
-    //take input value from search field
-    var city = $('#cityInput').val().trim();
+    var cityInput = capitalize(cityInputField);
+
+    
     //clear previous search
     $("#dailyConditions").empty();
     $(".forecastRow").empty();
-
+    // $('#dailyTitle').html("");
+    
     //check for empty field
-    if (city != '') {
-        // localStorage.setItem('cityHistory', JSON.stringify(cityHistory));
+    if (cityInput != '') {
+        cityHistory.push(cityInput);
+        localStorage.setItem('historyKey', JSON.stringify(cityHistory));
+        // console.log(cityHistory);
+        
 
         $.ajax({
 
           type: "GET",
-          url: `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&APPID=${apiKey}`,
+          url: `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&units=imperial&APPID=${apiKey}`,
           id: "city",
           success: function(data) {
-
+            
             
             console.log(data);
             var uvLat = data.coord.lat;
             var uvLon = data.coord.lon;
+            var date = new Date(data.dt * 1000).toLocaleDateString('en-US');
+            var icon = data.weather[0].icon
+            // console.log(date);
             // console.log(uvLat);
             // console.log(uvLon);
-            // $('#daily-forecast').text(`${city}`)
-
+            
+            var dailyTitle = (`${cityInput} ${date}`)
             var dailyTemp = (`Temperature: ${data.main.temp} °F`);
             var dailyWind = (`Wind Speed: ${data.wind.speed} MPH`);
             var dailyHumid = (`Humidity: ${data.main.humidity}%`);
 
+            
+            $('#dailyTitle').html(`${dailyTitle} <img src="https://openweathermap.org/img/wn/${icon}.png"/>`)
             $('#dailyConditions').append($(`<li>${dailyTemp}</li>`));
             $('#dailyConditions').append($(`<li>${dailyWind}</li>`));
             $('#dailyConditions').append($(`<li>${dailyHumid}</li>`));
@@ -49,7 +73,7 @@ var cityHistory = [];
               url: `https://api.openweathermap.org/data/2.5/onecall?lat=${uvLat}&lon=${uvLon}&exclude={part}&appid=${apiKey}`,
               id: "city",
               success: function(data) {
-                
+                console.log(data);
                 var propUV = `${data.current.uvi}`;
                 // var strUV = (`UV Index: ${propUV}`);
                 $('#dailyConditions').append(`<li>UV Index: <span id="uvColor">${propUV}</span></li>`);
@@ -83,7 +107,7 @@ var cityHistory = [];
           $.ajax({
 
             type: "GET",
-            url: `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&APPID=${apiKey}`,
+            url: `https://api.openweathermap.org/data/2.5/forecast?q=${cityInput}&units=imperial&APPID=${apiKey}`,
             id: "city",
             
           }).then(function (data) {
@@ -99,7 +123,7 @@ var cityHistory = [];
               var forecastTemp = $('<p class = "temp">');
               var forecastWind = $('<p class = "wind">');
               var forecastHumidity = $('<p class = "humid">');
-              // var forecastUV = $(`<p class="castUV">`)
+              
 
               var compTime = data.list[i].dt;
               var humanTime = compTime *= 1000;
@@ -113,11 +137,13 @@ var cityHistory = [];
               forecastWind.text(`Wind: ${data.list[i].wind.speed}`);
               forecastHumidity.text(`Humidity: ${data.list[i].main.humidity}`);
               
+              
               $(`.forecastRow`).append(forecastCard);
               forecastCard.append(forecastTitle);
               forecastCard.append(forecastTemp);
               forecastCard.append(forecastWind);
               forecastCard.append(forecastHumidity);
+              // forecastCard.append(fiveImage);
             }
           });
         }

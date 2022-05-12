@@ -61,6 +61,10 @@ unix/epoch to datetime: https://stackoverflow.com/questions/847185/convert-a-uni
 
 search with enter key: https://stackoverflow.com/questions/979662/how-can-i-detect-pressing-enter-on-the-keyboard-using-jquery
 
+timestamp to US date format: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString
+
+capitalize first letter of each word: https://stackoverflow.com/questions/62420487/jquery-capitalize-first-letter-of-each-word
+
 ## License
 
 NA

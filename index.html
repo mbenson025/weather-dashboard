@@ -12,15 +12,15 @@
     <title>Weather Dashboard</title>
   </head>
 
-  <body>
+  <body class="container-fluid">
     <div class="row">
-      <header class="container-fluid text-center bg-dark text-white">
+      <header class="row text-center bg-dark text-white">
         <h1>Weather Dashboard</h1>
       </header>
     </div>
 
-    <main class="container-fluid row">
-      <div class="col-12 col-md-4 pl-2 bg-light">
+    <main class="row">
+      <div class="column col-3">
         <p class="search-header fs-3">Search for a City:</p>
 
         <input
@@ -38,13 +38,14 @@
         <ul id="history-list" class="list-group"></ul>
       </div>
 
-      <div id="daily-forecast" class="col-lg-9" style="float: right">
-        Daily Forecast
+      <div id="daily-forecast" class="column col-9 card">
+        <h2 id="dailyTitle"></h2>
         <ul id="dailyConditions"></ul>
-        <div id="five-day-forecast" class="container">
-          <h2 id="five-title">5-Day Forecast</h2>
-          <div class="forecastRow row"></div>
-        </div>
+      </div>
+
+      <div id="five-day-forecast" class="container">
+        <h2 id="five-title">5-Day Forecast</h2>
+        <div class="forecastRow row"></div>
       </div>
     </main>
 
