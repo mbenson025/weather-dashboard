@@ -2,13 +2,12 @@ $(document).ready(function() {
     $('#five-day-forecast').hide();
     $('#daily-forecast').hide();
 
-
     var cityHistory = JSON.parse(localStorage.getItem('historyKey')) || [];
 
     if (cityHistory !== null) {
         
         cityHistory.forEach(function(cityHistory){
-        $('.recentHistory').append('<li>' +  cityHistory + '</li>');
+        $('.recentHistory').append($(`<button id="recBtn" class= "recBtn list-group-item list-group-item-action">${cityHistory}</button>`));
         });
     }
 });
@@ -48,10 +47,9 @@ var cityHistory = [];
       //check for duplicate search before putting into array
       if (!cityHistory.includes(cityInput)){
         cityHistory.push(cityInput);
-        var cityList = $(`<li class="pastCity">${cityInput}</li>`);
+        var cityList = $(`<button class="recBtn list-group-item list-group-item-action">${cityInput}</button>`);
         console.log(cityList);
         $('.recentHistory').append(cityList);
-
       }
         localStorage.setItem('historyKey', JSON.stringify(cityHistory));
         console.log(cityHistory.length);
@@ -186,8 +184,19 @@ $('#cityInput').keypress(function(e){
   if(e.which === 13) {
     searchWeather();
   }
-})
+});
 
 
-
+// $('.recBtn').click(function(e){
   
+// });
+
+  $("#recBtn").click(function(e) {
+    e.preventDefault();
+    search(e.target.textContent);
+
+    
+
+    // $("#current-weather").show();
+    // $("#forecast-weather").show();
+  });
