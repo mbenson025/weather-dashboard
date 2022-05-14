@@ -8,8 +8,15 @@ $(document).ready(function() {
         
         cityHistory.forEach(function(cityHistory){
         $('.recentHistory').append($(`<button id="recBtn" class= "recBtn list-group-item list-group-item-action">${cityHistory}</button>`));
-        });
+      });
     }
+
+    // let history = document.getElementById("recBtn")
+    // history.addEventListener("recBtn", "click").innerHTML.value
+
+    // searchWeather(history);
+
+
 });
 
 
@@ -120,7 +127,7 @@ var cityHistory = [];
           }
       });
 
-          function fiveCast (uvLat,uvLon) {
+          function fiveCast () {
           //5 DAYS
           $.ajax({
 
@@ -129,8 +136,10 @@ var cityHistory = [];
             id: "city",
             
           }).then(function (data) {
+            console.log(data);
             
-            console.log(data.list);
+
+           // console.log(data.list);
             // console.log(data.list[0]);
             // console.log(data.list[0].dt);
             // console.log(data.list[0].main.temp);
@@ -178,7 +187,7 @@ var cityHistory = [];
 $('#submitBtn').click(function(){
     searchWeather();
 
-  });
+});
   //search with enter key
 $('#cityInput').keypress(function(e){
   if(e.which === 13) {
@@ -187,16 +196,9 @@ $('#cityInput').keypress(function(e){
 });
 
 
-// $('.recBtn').click(function(e){
-  
-// });
 
-  $("#recBtn").click(function(e) {
-    e.preventDefault();
-    search(e.target.textContent);
 
-    
+// let history = document.getElementById("recBtn")
+//     history.addEventListener("recBtn", "click").innerHTML.value
 
-    // $("#current-weather").show();
-    // $("#forecast-weather").show();
-  });
+//     searchWeather(history);

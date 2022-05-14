@@ -1,16 +1,14 @@
 <h1> Weather Dashboard </h1>
 
-## Table of Contents
-
--[Link](#link) -[Installation](#installation) -[Instructions](#instructions) -[Screenshots](#screenshots) -[User-Story](#user-story) -[Acceptance-Criteria](#acceptance-criteria) -[Credits](#credits) -[License](#license)
-
-<br></br>
-
 ## Link:
 
 <a href="https://mbenson025.github.io/weather-dashboard/">Link to deployed app</a>
 
-<br>
+## Table of Contents
+
+[Installation](#installation) -[Instructions](#instructions) -[Screenshots](#screenshots) -[User-Story](#user-story) -[Acceptance-Criteria](#acceptance-criteria) -[Credits](#credits) -[License](#license)
+
+<br></br>
 
 ## Installation
 
