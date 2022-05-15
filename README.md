@@ -18,12 +18,16 @@ Download/clone repository or click link for browser link.
 
 ## Instructions
 
--
--
--
--
+-Type the name of a city and click search or press the "enter" key
+-Current weather and five day forecast appear on screen
+-Recent searches are added below search field
+-Click on a recent search for a quick city lookup
 
 ## Screenshots
+
+![weatherdash1](https://user-images.githubusercontent.com/35643709/168481901-303b59b3-4865-400b-a5d7-c94dd8e18aec.JPG)
+
+![weatherdash2](https://user-images.githubusercontent.com/35643709/168481914-aa22d62d-9057-400a-974e-e72d9e16d247.JPG)
 
 ## User-Story
 
