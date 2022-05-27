@@ -6,9 +6,25 @@
 
 ## Table of Contents
 
-[Installation](#installation) -[Instructions](#instructions) -[Screenshots](#screenshots) -[User-Story](#user-story) -[Acceptance-Criteria](#acceptance-criteria) -[Credits](#credits) -[License](#license)
+[About](#about) - [Technologies Used](#technologies-used) - [Installation](#installation) -[Instructions](#instructions) -[Screenshots](#screenshots) -[Live-Demo](#live-demo) -[Contact](#contact) -[License](#license)
 
 <br></br>
+
+## About
+
+This application allows a user to be able to search for a city and receive information about the current and future weather. Weather features include temperature, wind speed and humidity.
+
+The UV Index is displayed under the current day with a color displaying the amount of risk associated with exposure.
+
+There is a recent search feature that adds cities searched below the search bar. This list persists with localStorage and the user is able to click on any of the cities for a quick search.
+
+<br>
+
+## Technologies Used:
+
+openweathermap.org APIs, jQuery and ajax. Languages used: HTML5, CSS, JavaScript
+
+<br>
 
 ## Installation
 
@@ -23,52 +39,46 @@ Download/clone repository or click link for browser link.
 -Recent searches are added below search field
 -Click on a recent search for a quick city lookup
 
-## Screenshots
+<br>
 
-![weatherdash1](https://user-images.githubusercontent.com/35643709/168481901-303b59b3-4865-400b-a5d7-c94dd8e18aec.JPG)
+## Screenshots:
 
-![weatherdash2](https://user-images.githubusercontent.com/35643709/168481914-aa22d62d-9057-400a-974e-e72d9e16d247.JPG)
+<br>
 
-## User-Story
+<img src="./assets/img/weatherdashss1.jpg" alt="search page" title="Search Screen">
 
-```
-AS A traveler
-I WANT to see the weather outlook for multiple cities
-SO THAT I can plan a trip accordingly
-```
+<br>
 
-## Acceptance-Criteria
+<img src="./assets/img/weatherdashss2.jpg" alt="weather display" title="Current and Future Forecast">
 
-```
-GIVEN a weather dashboard with form inputs
-WHEN I search for a city
-THEN I am presented with current and future conditions for that city and that city is added to the search history
-WHEN I view current weather conditions for that city
-THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
-WHEN I view the UV index
-THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
-WHEN I view future weather conditions for that city
-THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
-WHEN I click on a city in the search history
-THEN I am again presented with current and future conditions for that city
-```
+<br>
 
-## Credits
+## Live Demo:
 
-<a href="https://openweathermap.org/api/one-call-api">OpenWeather API</a>
+<br>
 
-AJAX Fetch: https://www.youtube.com/watch?v=fEYx8dQr_cQ
+<img src="./assets/img/weatherdashvid.gif" alt="app demo" title="Weather Dashboard Demonstration">
 
-unix/epoch to datetime: https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript
+<br>
 
-search with enter key: https://stackoverflow.com/questions/979662/how-can-i-detect-pressing-enter-on-the-keyboard-using-jquery
+## Contact:
 
-timestamp to US date format: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString
+<br>
 
-capitalize first letter of each word: https://stackoverflow.com/questions/62420487/jquery-capitalize-first-letter-of-each-word
+Mason Benson - mbenson025@gmail.com
 
-includes function for checking duplicate searches: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes
+GitHub Profile - https://github.com/mbenson025
 
-## License
+<br>
 
-NA
+<br>
+
+## License:
+
+<br>
+
+MIT License
+
+Copyright (c) 2022 Mason Benson
+
+Licensed under the [MIT](LICENSE) license.
